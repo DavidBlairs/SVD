@@ -1,0 +1,193 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, physics}
+\newtheorem{definition}{Definition}[section]
+
+\title{Notes: Mathematics of Machine Learning}
+\author{1807730}
+\date{October 2022}
+
+\begin{document}
+	
+	\maketitle
+	\newpage
+	
+	\section{Linear Algebra}
+	\begin{definition}[An algebra]
+		\normalfont A set of objects and a set of rules to manipulate these objects is known as an algebra. 
+	\end{definition}
+	\begin{definition}[A vector]
+		\normalfont Vectors are objects which when added together or multiplied by a scalar, they produce an object of the same kind.
+	\end{definition}
+	\normalfont Examples of vectors include geometric vectors, polynomials and audio signals. Linear Algebra is the study of vectors and the set of rules to manipulate them. 
+	\subsection{Matrices}
+	\begin{definition}[Matrix]
+		\normalfont With $m, n \in \mathbb{N}$ a real-valued $(m, n)$ matrix $\textbf{A}$ is an $m.n$ tuple of elements $a_{ij}, i = 1, \ldots,m,$ $j = 1, \ldots, n$ which is ordered according to a rectangular scheme consisting of $m$ rows and $n$ columns: 
+		\begin{align}
+			\textbf{A} = \begin{bmatrix}
+				a_{11} & a_{12} & \cdots & a_{1n} \\ 
+				a_{21} & a_{22} & \cdots & a_{2n} \\
+				\vdots & \vdots & & \vdots \\
+				a_{m1} & a_{m2} & \cdots & a_{mn}
+			\end{bmatrix}
+		\end{align}
+	\end{definition}
+	\subsubsection{Matrix Operations}
+	The sum of two matrices $\textbf{A} \in \mathbb{R}^{m \times n}$ and $\textbf{B} \in \mathbb{R}^{m \times n}$ is defined as the element-wise sum i.e.
+	\begin{align}
+		\textbf{A} + \textbf{B} := \begin{bmatrix}
+			a_{11} + b_{11} & \cdots & a_{1n} + b_{1n} \\
+			\vdots & & \vdots \\
+			a_{m1} + b_{m1} & \cdots & a_{mn} + b_{1n} 
+		\end{bmatrix} \in \mathbb{R}^{m \times n}
+	\end{align}
+	For matrices $\textbf{A} \in \mathbb{R}^{m \times n}$, $\textbf{B} \in \mathbb{R}^{m \times k}$, the elements $c_{ij}$ of the product $\textbf{C} = \textbf{AB} \in \mathbb{R}^{m \times k}$ are computed as:
+	\begin{align}
+		 \sum_{l=1}^{n} a_{il}b_{lj}, \hspace{10pt} i = 1, \ldots,m, \hspace{10pt} j = 1, \ldots, k
+	\end{align}
+	For matrix multiplication $c_{ij} \ne a_{ij}b_{ij}$. If it was, the element-wise operation is known as the \textit{Hadamard Product}. Matrix multiplication is not commutative i.e. $\textbf{AB} \ne \textbf{BA}$
+	\subsubsection{Types of Matrices}
+	\begin{definition}[Identity matrix]
+		\normalfont In $\mathbb{R}^{n \times n}$, we define the identity matrix as an $n  \times  x$-matrix containing 1 on the diagonal and 0 everywhere else:
+		\begin{align}
+			I_n := \begin{bmatrix}
+				1 & 0 & \cdots & 0 & \cdots & 0 \\
+				0 & 1 & \cdots & 0 & \cdots & 0 \\
+				\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+				0 & 0 & \cdots & 1 & \cdots & 0 \\
+				\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+				0 & 0 & \cdots & 0 & \cdots & 1 
+			\end{bmatrix}
+		\end{align} 
+	\end{definition}
+	\subsubsection{Properties of Matrices}
+	Associativity:
+	\begin{align}
+		\forall \textbf{A} \in \mathbb{R}^{m \times n}, \textbf{B} \in \mathbb{R}^{n \times p}, \textbf{C} \in \mathbb{R}^{p \times q}: (\textbf{AB})\textbf{C} = \textbf{A}(\textbf{BC})
+	\end{align}
+	Distributivity: 
+	\begin{align}
+		\forall \textbf{A}, \textbf{B} \in \mathbb{R}^{m \times n}, \textbf{C}, \textbf{D} \in \mathbb{R}^{n \times p}:\hspace{2pt} & (\textbf{A} + \textbf{B})\textbf{C} = \textbf{AC} + \textbf{BC} \\ & \textbf{A}(\textbf{C} + \textbf{D}) = \textbf{AC} + \textbf{AD}
+	\end{align}
+	Multiplication with the identity matrix:
+	\begin{align}
+		\forall \textbf{A} \in \mathbb{R}^{m \times n}: \textbf{I}_m\textbf{A} = \textbf{AI}_n = \textbf{A}
+ 	\end{align}
+ 	Note that $\textbf{I}_m \ne \textbf{I}_n$ for $m \ne n$.
+ 	\subsubsection{Inverse and Transpose of a Matrix}
+ 	\begin{definition}[Inverse]
+ 		\normalfont Consider a square matrix $\textbf{A} \in \mathbb{R}^{n \times n}$. Let the matrix $\textbf{B} \in \mathbb{R}^{n \times n}$ have the property that $\textbf{AB} = \textbf{I}_n = \textbf{BA}$. $\textbf{B}$ is called inverse of $\textbf{A}$ and denoted by $\textbf{A}^{-1}$. 
+ 	\end{definition}
+ 	Not every matrix $\textbf{A}$ possesses an inverse $\textbf{A}^{-1}$. If this inverse does exist, $\mathbf{A}$ is called $\textit{regular/invertible/nonsingular}$, otherwise $\textit{singular/noninvertible}$. When the inverse does exist, it is unique. 
+ 	\begin{definition}[Transpose]
+ 		For $A \in \mathbb{R}^{m \times n}$ the matrix $B \in \mathbb{R}^{n \times m}$ with $b_{ij} = a_{ji}$ is called the $\textit{transpose}$ of $\mathbf{A}$. We write $\mathbf{B} = \mathbf{A}^{\top}$.
+ 	\end{definition}
+ 	The following are properties of inverses and transposes:
+ 	\begin{align}
+ 		\textbf{AA}^{-1} &= \textbf{I} = \textbf{A}^{-1}\textbf{A} \\
+ 		(\textbf{AB})^{-1} &= \textbf{B}^{-1}\textbf{A}^{-1} \\
+ 		(\textbf{A} + \textbf{B})^{-1} &\ne \textbf{A}^{-1} + \textbf{B}^{-1} \\
+ 		(\textbf{A}^{\top})^{\top} &= \textbf{A} \\
+ 		(\textbf{A} + \textbf{B})^{\top} &= \textbf{A}^{\top} + \textbf{B}^{\top} \\
+ 		(\textbf{AB})^{\top} &= \textbf{B}^{\top}\textbf{A}^{\top}
+ 	\end{align}
+ 	\begin{definition}[Symmetric Matrix]
+ 		A matrix $A \in \mathbb{R}^{n \times n}$ is symmetric if $\textbf{A} = \textbf{A}^{\top}$
+ 	\end{definition}
+ 	\subsubsection{Multiplication by a Scalar}
+ 	Let $A \in \mathbb{R}^{m \times n}$ and $\lambda \in \mathbb{R}$. Then $\lambda\textbf{A} = \textbf{K}$, $K_{ij} = \lambda a_{ij}$. Practically, $\lambda$ scales each element of $\textbf{A}$. For $\lambda, \psi \in \mathbb{R}$, the following holds: \newline\newline
+ 	Associativity:
+ 	\begin{align}
+ 		(\lambda\psi)\textbf{C} &= \lambda(\psi\textbf{C}), \hspace{10pt} \textbf{C} \in \mathbb{R}^{m \times n} \\
+ 		\lambda(\textbf{BC}) &= (\lambda\textbf{B})\textbf{C} = \textbf{B}(\lambda\textbf{C}) = (\textbf{BC})\lambda, \hspace{10pt} \textbf{B} \in \mathbb{R}^{m \times n}, \textbf{C} \in \mathbb{R}^{n \times k} \\
+ 		(\lambda\textbf{C})^{\top} &= \textbf{C}^{\top}\lambda^{\top} = \textbf{C}^{\top}\lambda = \lambda\textbf{C}^{\top} \hspace{5pt} \text{since} \hspace{5pt} \lambda = \lambda^{\top} \hspace{5pt} \forall \hspace{5pt} \lambda \in \mathbb{R}
+ 	\end{align}
+ 	Distributivity:
+ 	\begin{align}
+ 		(\lambda + \psi)\textbf{C} &= \lambda\textbf{C} + \psi\textbf{C}, \hspace{10pt} \textbf{C} \in \mathbb{R}^{m \times n} \\
+ 		\lambda(\textbf{B} + \textbf{C}) &= \lambda\textbf{B} + \lambda\textbf{C}, \hspace{10pt} \textbf{C}, \textbf{B} \in \mathbb{R}^{m \times n}
+ 	\end{align}
+ 	\subsection{Vector Spaces}
+ 	\subsubsection{Groups}
+ 	\begin{definition}[Group]
+ 		\normalfont Consider a set $\mathcal{G}$ and an operation $\otimes: \mathcal{G} \times \mathcal{G} \rightarrow \mathcal{G}$ defined on $\mathcal{G}$. Then $\mathcal{G} := (\mathcal{G}, \otimes)$ is called a group if the following hold:
+ 		\begin{enumerate}
+ 			\item Closure of $\mathcal{G}$ under $\otimes: \forall x, y \in \mathcal{G} : x \otimes y \in \mathcal{G}$
+ 			\item Associativity: $\forall x, y, z \in \mathcal{G}: (x \otimes y) \otimes z = x \otimes (y \otimes z)$
+ 			\item Neutral element: $\exists e \in \mathcal{G} \hspace{4pt} \forall x \in \mathcal{G} : x \otimes e = x$ and $e \otimes x = x$
+ 			\item Inverse element: $\forall x \in \mathcal{G} \hspace{4pt} \exists y \in \mathcal{G}: x \otimes y = e$ and $y \otimes x = e$, where e is the neutral element. This is often denoted as $x^{-1}$ however this is defined with respect to $\otimes$ and is not $\frac{1}{x}$.
+ 		\end{enumerate}
+ 	\end{definition}
+ 	If additionally $\forall x, y \in \mathcal{G}: x \otimes y = y \otimes x$, then $\mathcal{G} = (\mathcal{G}, \otimes)$ is an $\textit{Abelian group}$ (commutative). 
+ 	\begin{definition}[General Linear Group]
+ 		\normalfont The set of regular (invertible) matrices $A \in \mathbb{R}^{n \times n}$ is a group with respect to matrix multiplication and is called $\textit{general linear group}$ $\textit{GL}(n, \mathbb{R})$. However, since matrix multiplication is not commutative, the group is not Abelian.  
+ 	\end{definition}
+ 	\subsubsection{Vector Spaces}
+ 	We will consider sets that in addition to an inner operation $+$ also contain an outer operation $\cdot$. The multiplication of a vector $x \in \mathcal{G}$ by a scalar $\lambda \in \mathbb{R}$ would be considered the outer operation. 
+ 	\begin{definition}[Vector Space]
+ 		\normalfont A real-valued $\textit{vector space}$ $V = (V, +, \cdot)$ is a set $\mathcal{V}$ with two operations:
+ 		\begin{align}
+ 			+: \mathcal{V} &\times \mathcal{V} \rightarrow \mathcal{V} \hspace{10pt} (\text{Inner Operation}) \\
+ 			\cdot: \mathbb{E} &\times \mathcal{V} \rightarrow \mathcal{V} \hspace{10pt} (\text{Outer Operation})
+ 		\end{align}
+ 		where:
+ 		\begin{enumerate}
+ 			\item $(\mathcal{V}, +)$ is an Abelian group
+ 			\item Distributivity: 
+ 			\begin{enumerate}
+ 				\item $\forall \lambda \in \mathbb{R}, \textbf{x}, \textbf{y} \in \mathcal{V}: \lambda \cdot \textbf{x} + \lambda \cdot \textbf{y}$
+ 				\item $\forall \lambda, \psi \in \mathbb{R}, \textbf{x} \in \mathcal{V}: (\lambda + \psi) \cdot \textbf{x} = \lambda \cdot \textbf{x} + \psi \cdot \textbf{x}$
+ 			\end{enumerate} 
+ 			\item Associativity (outer operation): $\forall\lambda, \psi \in \mathbb{R}, \textbf{x} \in \mathcal{V}: \lambda \cdot (\psi \cdot \textbf{x}) = (\lambda\psi)\cdot\textbf{x}$
+ 			\item Neutral element with respect to the outer operation: $\forall \textbf{x} \in \mathcal{V}: 1 \cdot \textbf{x} = \textbf{x}$
+ 		\end{enumerate}
+ 	\end{definition}
+	The elements $\textbf{x} \in \mathcal{V}$ are called vectors. The neutral element of $(\mathcal{V}, +)$ is the zero vector $\textbf{0} = [0, \ldots, 0]^{\top}$, and the inner operation $+$ is called vector addition. The elements $\lambda \in \mathbb{R}$ are called scalars and the outer operation $\cdot$ is a multiplication by scalars. 
+	\subsubsection{Vector Subspaces}
+	\begin{definition}[Vector Subspaces]
+		\normalfont Let $\textit{V} = (\mathcal{V}, +, \cdot)$ be a vector space and $\mathcal{U} \subseteq \mathcal{V}, \mathcal{U} \ne \emptyset$. Then $\mathcal{U} = (\mathcal{U}, +, \cdot)$ is called vector subspace of $\textit{V}$ (or linear subspace) if $\mathit{U}$ is a vector space with the vector space operations $+$ and $\cdot$ restricted to $\mathcal{U} \times  \mathcal{U}$ and $\mathcal{R} \times \mathcal{U}$. We write $\textit{U} \subseteq \textit{V}$ to denote a subspace $\textit{U}$ of $\textit{V}$.
+	\end{definition}
+	If $\mathcal{U} \subseteq \mathcal{V}$ and $\textit{V}$ is a vector space, then $\textit{U}$ will inherit many properties from $\textit{V}$. This includes the Abelian group properties, the distributivity, the associativity and the neutral element. To determine whether $(\mathcal{U}, +, \cdot)$ is a subspace of $\textit{V}$ we still do need to show:
+	\begin{enumerate}
+		\item $\mathcal{U} \ne \emptyset$, in particular: $\textbf{0} \in \mathcal{U}$
+		\item Closure of $\textit{U}$:
+		\begin{enumerate}
+			\item With respect to the outer operation: $\forall \lambda \in \mathbb{R} \forall \textbf{x} \in \mathcal{U}: \lambda\textbf{x} \in \mathcal{U}$
+			\item With respect to the inner operation: $\forall \textbf{x}, \textbf{y} \in \mathcal{U}: \textbf{x} + \textbf{y} \in \ $
+		\end{enumerate}
+	\end{enumerate}
+	\subsection{Linear Independence}
+	\begin{definition}[Linear Combination]
+		\normalfont	Consider a vector space $\textit{V}$ and a finite number of vectors $\boldsymbol{x}_i,\ldots,\boldsymbol{x}_k \in \textit{V}$. Then, every $\boldsymbol{v} \in \textit{V}$ of the form
+		\begin{align}
+			\boldsymbol{v} = \lambda_1\boldsymbol{x}_1 + \cdots + \lambda_k\boldsymbol{x}_k =  \sum_{i=1}^{k} \lambda_i\boldsymbol{x}_i \in \textit{V}
+		\end{align}
+		with $\lambda_1,\ldots,\lambda_k \in \mathbb{R}$ is a $\textit{linear combination}$ of the vectors $\boldsymbol{x}_1,\cdots,\boldsymbol{x}_k$.
+	\end{definition}
+	\begin{definition}[Linear (In)dependence]
+		\normalfont Let us consider a vector space $\textit{V}$ with $k \in \mathbb{N}$ and  $\boldsymbol{x}_1,\cdots,\boldsymbol{x}_k \in \mathit{V}$. If there is a non-trivial combination, such that $\textbf{0} = \sum_{i=1}^{k} \lambda_i\boldsymbol{x}_i$ with at least one $\lambda_i \ne 0$, the vectors  $\boldsymbol{x}_1,\cdots,\boldsymbol{x}_k$ are $\textit{linearly dependent}$. 
+	\end{definition}
+	\subsection{Basis and Rank}
+	\subsubsection{Generating Set and Basis}
+	\begin{definition}[Generating Set and Span]
+		\normalfont Consider a vector space $\textit{V} = (\mathcal{V}, +, \cdot)$ and set of vectors $\mathcal{A} = \{\boldsymbol{x}_1,\ldots,\boldsymbol{x}_k\} \subseteq \textit{V}$. If every vector $\boldsymbol{v} \in \mathit{V}$ can be expressed as a linear combination of vectors of $\boldsymbol{x}_1,\ldots,\boldsymbol{x}_k$, $\mathcal{A}$ is called the generating set of $\textit{V}$. The set of all linear combinations of vectors in $\mathcal{A}$ is called the span of $\mathcal{A}$. If $\mathcal{A}$ spans the vector space $\textit{V}$, we write $\textit{V} = span[\mathcal{A}]$. 
+	\end{definition}
+	\begin{definition}[Basis]
+		\normalfont Consider a vector space $\textit{V} = (\textit{V}, +, \cdot)$ and $\mathcal{A} \subseteq \mathcal{V}$. A generating set $\mathcal{A}$ of $\textit{V}$ is called $\textit{minimal}$ if there exists no smaller set $\tilde{A} \subseteq \mathcal{A} \subseteq \mathcal{V}$ that spans $\textit{V}$. Every linearly independent generating set of $\textit{V}$  is minimal and is called a $\mathit{basis}$ or $\textit{V}$.
+	\end{definition}
+	Let $\textit{V} = (\mathcal{V}, +, \cdot)$ be a vector space and $\mathcal{B} \subseteq \mathcal{V}$, $\mathcal{B} \ne \emptyset$. Then, the following statements are equivalent:
+	\begin{itemize}
+		\item $\mathcal{B}$ is a basis of $\mathcal{V}$. 
+		\item $\mathcal{B}$ is the minimal generating set. 
+		\item $\mathcal{B}$ is a maximal linearly independent set of vectors in $\textit{V}$, i.e., adding other vectors to this set will make it linearly dependent. 
+		\item Every vector $\boldsymbol{x} \in \textit{V}$ is a linear combination of vectors from $\mathcal{B}$, and every linear combination is unique, i.e., with 
+		\begin{align}
+			\boldsymbol{x} = \sum_{i=1}^{k} \lambda_i\boldsymbol{b}_i = \sum_{i=1}^{k}\psi_i\boldsymbol{b}_i 
+		\end{align} 
+		and $\lambda_i,\psi_i \in \mathbb{R}, \boldsymbol{b}_i \in \mathcal{B}$ it follows that $\lambda_i = \psi_i, i = 1,\ldots,k$.
+	\end{itemize} 
+	The $\textit{dimension}$ of $\textit{V}$ is the number of basis vectors of $\textit{V}$, and we write $dim(\mathit{V})$. if $\mathit{U} \subseteq \mathit{V}$ is a subspace of $\mathit{V}$, then $dim(\mathit{U}) \le dim(\mathit{V})$ and $dim(\mathit{U}) = dim(\mathit{V})$ if and only if $\mathit{U} = \mathit{V}$. Intuitively, the dimension of a vector space can be thought of as the number of independent directions in this vector space. 
+	\begin{definition}[Rank]
+		\normalfont The number of linearly independent columns of a matrix $\textbf{A} \in \mathbb{R}^{m \times n}$ equals the number of linearly independent rows and is called the $\textit{rank}$ of $\textbf{A}$ and is denoted by $rk(\textbf{A})$.
+	\end{definition}
+\end{document}

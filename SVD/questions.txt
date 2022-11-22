@@ -1,0 +1,4 @@
+1. For a 2x2 matrix you can use the determinant to decide whether the inverse exists. Does this apply for larger sized matrices? answered
+2. Do the terms regular/invertible/nonsingular all mean that the inverse doesnt exist or do they mean something else which is a consequence of invertibility?
+
+Eigenvalue problem: 4.1, 4.2, 4.4, 4.5, Maybe 4.3, Do the exercises in chapter 2, 3blue1brown, check out his github 

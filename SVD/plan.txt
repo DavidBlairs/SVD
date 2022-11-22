@@ -1,0 +1,11 @@
+1. Begin with the functions to seperate the components of an image using the example image (RGB strips)
+2. Show the matrix representation of a particular component, do the red
+3. How to perform svd in python (show the function)
+4. The function to derive the variance explained by the singular values
+5. Plotting of the variance explained by the singular values
+6. Getting a particular approximation of a matrix
+7. Plotting n approximations
+8. Plotting n approximations
+
+
+Show formula and functions for each step

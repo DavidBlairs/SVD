@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} perform the SV decomposition}
+\PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}perform\PYGZus{}svd}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{matrix}\PYG{p}{:} \PYG{n}{np}\PYG{o}{.}\PYG{n}{matrix}\PYG{p}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n+nb}{tuple}\PYG{p}{:}
+	\PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{svd}\PYG{p}{(}\PYG{n}{matrix}\PYG{p}{)}
+\end{Verbatim}
