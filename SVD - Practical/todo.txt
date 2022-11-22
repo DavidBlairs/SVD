@@ -1,0 +1,3 @@
+write up the python class RGB.
+Recombine the RGB photos into the original photo (use a test image). Subtract one matrix from another to tell the diff.  
+verbatum enrivonment on latex for code. 
